@@ -1,0 +1,24 @@
+
+body
+{
+	font-family: 'Roboto', sans-serif;
+	color: #333;
+}
+
+img
+{
+	max-width: 100%;
+	height: auto;
+}
+
+a
+{
+	color: $mainOrange;
+}
+
+* 
+{
+	/* retains columns that exceeds 100% because of
+	because of gutter padding customizations */
+	box-sizing: border-box;
+}
