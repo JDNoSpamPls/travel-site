@@ -1,0 +1,24 @@
+/* 	=======================================================
+	Do not edit modules/_sprite directly as it is generated 
+	automatically by Gulp. Instead edit gulp/templates/sprite.
+	========================================================== */
+{{#shapes}}
+
+	{{#first}}
+	.icon 
+	{
+		background-image: url('/assets/images/sprites/{{{sprite}}}'); /* note 3 sets of curly brackets here! */
+	}
+	{{/first}}
+
+	/* for reference on this code format and variable names used, 
+		visit jkphl/svg-sprite on Github, open 'templating.md' 
+		read me inside the 'docs' folder file */
+	.icon--{{base}}
+	{
+		width: {{width.outer}}px;
+		height: {{height.outer}}px;
+		background-position: {{position.relative.xy}};
+	}
+
+{{/shapes}}
