@@ -46,58 +46,20 @@
 
 	'use strict';
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	var _MobileMenu = __webpack_require__(1);
 
-	var _Person2 = __webpack_require__(1);
-
-	var _Person3 = _interopRequireDefault(_Person2);
+	var _MobileMenu2 = _interopRequireDefault(_MobileMenu);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var $ = __webpack_require__(2);
-	// var Person = require('./modules/Person'); // this is via native NodeJS
-
-	// this is the new ES6 way of "requiring" modules
-
-	var Adult = function (_Person) {
-		_inherits(Adult, _Person);
-
-		function Adult() {
-			_classCallCheck(this, Adult);
-
-			return _possibleConstructorReturn(this, (Adult.__proto__ || Object.getPrototypeOf(Adult)).apply(this, arguments));
-		}
-
-		_createClass(Adult, [{
-			key: 'payTaxes',
-			value: function payTaxes() {
-				console.log(this.name + " no owes $0 in taxes.");
-			}
-		}]);
-
-		return Adult;
-	}(_Person3.default);
-
-	// alert("We are the world. We are the children.");
-
-	var john = new _Person3.default("John Doe", "blue");
-	john.greet();
-
-	var jane = new Adult("Jane Smith", "orange");
-	jane.greet();
-	jane.payTaxes();
-
-	$("h1").remove();
+	var mobileMenu = new _MobileMenu2.default(); /* note..
+	                                             the name MobileMenu is technically a variable 
+	                                             and can be changed to anything you want, but 
+	                                             it's best to stay semantic so MobileMenu it is. */
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
@@ -105,51 +67,66 @@
 		value: true
 	});
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /*
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     jquery from the npm package, which is in /node_modules */
+
+
+	var _jquery = __webpack_require__(2);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	// constructor
-	//  THIS IS JavaScript 5
-	// function Person(fullName, favColor) {
-	// 	this.name = fullName;
-	// 	this.favoriteColor = favColor;
-	// 	this.greet = function() {
-	// 		console.log("Hello0000 there, my name is " + this.name + " and my favorite color is " + this.favoriteColor + ".");
-	// 	}
-	// } 
+	var MobileMenu = function () {
+		function MobileMenu() {
+			_classCallCheck(this, MobileMenu);
 
-	/* BELOW IS THE ES6 VERSION */
-	var Person = function () {
-		// note: no () here since this is a class
+			/* // what not to do: the jquery spaghetti
+	  $("div.site-header__menu-icon").click(function() {
+	  	console.log("Did something when this icon got clicked.");
+	  });*/
+			// do these instead..
+			this.siteHeader = (0, _jquery2.default)("header.site-header");
+			this.menuIcon = (0, _jquery2.default)("div.site-header__menu-icon");
+			this.menuContent = (0, _jquery2.default)("div.site-header__menu-content");
 
-		// class constructor
-		function Person(fullName, favColor) {
-			_classCallCheck(this, Person);
-
-			this.name = fullName;
-			this.favoriteColor = favColor;
+			// callback functions
+			this.events();
 		}
 
-		// accessors/mutators
-		// methods here 
+		// user actions, mostly
 
 
-		_createClass(Person, [{
-			key: "greet",
-			value: function greet() {
-				console.log("Huy!, ako ay si " + this.name + " at ako ay isang kulay na " + this.favoriteColor + ".");
+		_createClass(MobileMenu, [{
+			key: "events",
+			value: function events() {
+				/* note..
+	   the .click() function here causes the 'this' keyword
+	   to point to the .menuIcon() object, not the class MobileMenu
+	   therefore, .bind() is used to make sure it stays pointing to
+	   MobileMenu */
+				this.menuIcon.click(this.toggleTheMenu.bind(this));
+				// console.log(this);
+			}
+
+			// functions, things to do in some 'event'
+
+		}, {
+			key: "toggleTheMenu",
+			value: function toggleTheMenu() {
+				// alert(this);
+				this.menuContent.toggleClass("site-header__menu-content--is-visible");
+				this.siteHeader.toggleClass("site-header--is-expanded");
+				this.menuIcon.toggleClass("site-header__menu-icon--close-x");
 			}
 		}]);
 
-		return Person;
+		return MobileMenu;
 	}();
 
-	// module.exports = Person; // the old node.js way
-
-
-	exports.default = Person; // the new ES6 way
-
+	exports.default = MobileMenu;
 
 	//
 

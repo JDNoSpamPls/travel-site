@@ -1,20 +1,7 @@
-var $ = require('jquery');
-// var Person = require('./modules/Person'); // this is via native NodeJS
-import Person from './modules/Person'; // this is the new ES6 way of "requiring" modules
+/* note..
+the name MobileMenu is technically a variable 
+and can be changed to anything you want, but 
+it's best to stay semantic so MobileMenu it is. */
+import MobileMenu from './modules/MobileMenu';
 
-class Adult extends Person {
-	payTaxes() {
-		console.log(this.name + " no owes $0 in taxes.");
-	}
-}
-
-// alert("We are the world. We are the children.");
-
-var john = new Person("John Doe", "blue");
-john.greet();
-
-var jane = new Adult("Jane Smith", "orange");
-jane.greet();
-jane.payTaxes();
-
-$("h1").remove();
+var mobileMenu = new MobileMenu();
