@@ -8,6 +8,7 @@
 	}
 
 	&__text-content {
+		padding-top: 88px;
 		position: absolute;
 		top: 50%;
 		/* vertically centers elements in this div */
@@ -16,6 +17,9 @@
 		/* horizontally centers elements inside this div */
 		width: 100%;
 		text-align: center;
+		@mixin atMedium {
+			padding-top: 60px;
+		}
 	}
 
 	&__title {

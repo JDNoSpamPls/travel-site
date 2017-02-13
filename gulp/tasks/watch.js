@@ -8,16 +8,20 @@ gulp.task('watch', function() {
 	browserSync.init({
 		// notify: false, // removes the notification at top-right corner of browser
 		server: {
-			baseDir: "app"
+			baseDir: "./"
 		}
 	});
 
-	watch('./app/index.html', function() {
+	watch('./resources/index.html', function() {
 		browserSync.reload();
 	});
 
 	watch('./app/assets/styles/**/*.css', function() {
 		gulp.start('cssInject');
+	});
+
+	watch('./app/assets/scripts/**/*.js', function() {
+		gulp.start('scriptsRefresh');
 	});
 
 });
@@ -28,3 +32,16 @@ gulp.task('cssInject', ['styles'], function() {
 		.pipe(browserSync.stream());
 
 });
+
+gulp.task('scriptsRefresh', ['scripts'], function() {
+	browserSync.reload();
+});
+
+
+
+
+
+
+
+
+// 
