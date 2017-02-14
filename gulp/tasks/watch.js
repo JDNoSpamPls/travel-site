@@ -8,11 +8,11 @@ gulp.task('watch', function() {
 	browserSync.init({
 		// notify: false, // removes the notification at top-right corner of browser
 		server: {
-			baseDir: "./"
+			baseDir: "app"
 		}
 	});
 
-	watch('./resources/index.html', function() {
+	watch('./app/index.html', function() {
 		browserSync.reload();
 	});
 
