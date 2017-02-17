@@ -9,6 +9,11 @@
 	{
 		background-image: url('/assets/images/sprites/{{{sprite}}}'); /* note 3 sets of curly brackets here! */
 	}
+
+	.no-svg .icon 
+	{
+		background-image: url('/assets/images/sprites/{{#replaceSvgWithPng}}{{{sprite}}}{{/replaceSvgWithPng}}');	
+	}
 	{{/first}}
 
 	/* for reference on this code format and variable names used, 
